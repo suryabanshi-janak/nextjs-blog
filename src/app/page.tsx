@@ -1,3 +1,4 @@
+import Posts from '@/components/Posts';
 import ProfileImage from '@/components/ProfileImage';
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
           I'm <span className='font-bold'>Zanak</span>
         </span>
       </p>
+      <Posts />
     </main>
   );
 }
