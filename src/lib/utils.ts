@@ -3,6 +3,8 @@ import path from 'path';
 import { ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import matter from 'gray-matter';
+import { remark } from 'remark';
+import html from 'remark-html';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -41,4 +43,28 @@ export function getSortedPostsData() {
   });
   // Sort posts by date
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+export async function getPostData(id: string) {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents);
+
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+
+  const contentHtml = processedContent.toString();
+
+  // Combine the data with the id
+  const blogPostWithHTML: BlogPost & { contentHtml: string } = {
+    id,
+    title: matterResult.data.title,
+    date: matterResult.data.date,
+    contentHtml,
+  };
+
+  return blogPostWithHTML;
 }
