@@ -3,7 +3,7 @@ import ProfileImage from '@/components/ProfileImage';
 
 export default function Home() {
   return (
-    <main className='px-6 mx-auto'>
+    <div className='mx-auto'>
       <ProfileImage />
       <p className='my-12 text-center text-3xl dark:text-white'>
         Hello and welcome 👋{' '}
@@ -12,6 +12,6 @@ export default function Home() {
         </span>
       </p>
       <Posts />
-    </main>
+    </div>
   );
 }
