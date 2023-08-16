@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import getFormattedDate from '@/lib/utils';
 
-export default function PostItem({ post }: { post: BlogPost }) {
+export default function PostItem({ post }: { post: Meta }) {
   const { id, title, date } = post;
   const formattedDate = getFormattedDate(date);
 
