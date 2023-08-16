@@ -3,6 +3,9 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings/lib';
 import rehypeHighlight from 'rehype-highlight/lib';
 import rehypeSlug from 'rehype-slug';
 
+import CustomImage from '@/components/CustomImage';
+import Video from '@/components/Video';
+
 type Filetree = {
   tree: [
     {
@@ -33,6 +36,10 @@ export async function getPostByName(
 
   const { frontmatter, content } = await compileMDX<Omit<Meta, 'id'>>({
     source: rawMDX,
+    components: {
+      Video,
+      CustomImage,
+    },
     options: {
       parseFrontmatter: true,
       mdxOptions: {
