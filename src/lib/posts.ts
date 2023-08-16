@@ -30,6 +30,9 @@ export async function getPostByName(
 
   const { frontmatter, content } = await compileMDX<Omit<Meta, 'id'>>({
     source: rawMDX,
+    options: {
+      parseFrontmatter: true,
+    },
   });
 
   const id = fileName.replace(/\.mdx$/, '');
