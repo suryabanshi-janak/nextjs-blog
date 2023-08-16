@@ -2,10 +2,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import getFormattedDate from '@/lib/utils';
 import { getPostByName } from '@/lib/posts';
+import 'highlight.js/styles/github-dark.css';
 
 type Props = {
   params: { postId: string };
 };
+
+export const revalidate = 0;
 
 export async function generateMetadata({ params: { postId } }: Props) {
   const post = await getPostByName(`${postId}.mdx`);
